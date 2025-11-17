@@ -136,4 +136,88 @@ int main() {
         // Capturamos las excepciones por tipo. 'domain_error' es para errores matemáticos lógicos
         // (ej. raíz negativa), 'runtime_error' es para errores que ocurren en tiempo de ejecución (ej. div/0).
         catch (const domain_error& e) {
-            cout << "\nERROR MATEMATICO: "
+            cout << "\nERROR MATEMATICO: " << e.what() << endl;
+        }
+        catch (const runtime_error& e) {
+            cout << "\nERROR EN EJECUCION: " << e.what() << endl;
+        }
+        // Un 'catch' genérico para cualquier otra excepción
+        catch (const exception& e) {
+            cout << "\nERROR INESPERADO: " << e.what() << endl;
+        }
+    } // Este es el cierre del 'while(true)'
+
+    return 0; // Aunque el bucle es infinito, es buena práctica tener un return
+
+} // <-- CORRECCIÓN: Este es el '}' que faltaba (cierre de int main())
+
+
+/*
+ * --- Implementación de Funciones ---
+ */
+
+// --- BÁSICAS ---
+double sumar(double a, double b) {
+    return a + b;
+}
+
+double restar(double a, double b) {
+    return a - b;
+}
+
+double multiplicar(double a, double b) {
+    return a * b;
+}
+
+// REQUISITO: Excepción de división por cero
+double dividir(double a, double b) {
+    if (b == 0) {
+        // 'throw' detiene la función y "lanza" un objeto de error
+        throw runtime_error("Division por cero no permitida.");
+    }
+    return a / b;
+}
+
+// --- AVANZADAS Y REQUISITOS ---
+
+// REQUISITO: Sobrecarga (implementación)
+double sumar(double a, double b, double c) {
+    cout << "(Usando funcion sobrecargada de 3 parametros) ";
+    return a + b + c;
+}
+
+// REQUISITO: Parámetro por omisión (implementación)
+double potencia(double base, double exponente) {
+    return pow(base, exponente); // 'pow' es de <cmath>
+}
+
+
+// REQUISITO: Excepción de raíz negativa
+double raizCuadrada(double n) {
+    if (n < 0) {
+        // Usamos 'domain_error' que es específico para argumentos matemáticos inválidos
+        throw domain_error("No se puede calcular la raiz cuadrada de un numero negativo.");
+    }
+    return sqrt(n); // 'sqrt' es de <cmath>
+}
+
+// REQUISITO: Recursividad y Excepción
+unsigned long long factorial(int n) {
+    // Excepción primero (buena práctica)
+    if (n < 0) {
+        throw domain_error("Factorial no esta definido para numeros negativos.");
+    }
+
+    // --- Inicio de la Recursividad ---
+    // 1. Caso Base: El punto donde la recursión se detiene.
+    // El factorial de 0 (y de 1) es 1.
+    if (n <= 1) {
+        return 1;
+    }
+    
+    // 2. Paso Recursivo: La función se llama a sí misma con un problema más pequeño.
+    // n! = n * (n-1)!
+    return n * factorial(n - 1);
+}
+
+//probando codigo
