@@ -40,17 +40,3 @@ Este proyecto fue diseñado para poner en práctica los siguientes requisitos de
 
 ---
 
-## 💻 Cómo Compilar y Ejecutar
-
-Si tienes un compilador de C++ como `g++`, puedes compilar y ejecutar el programa de la siguiente manera:
-
-```bash
-# 1. Clona el repositorio (o descarga el .cpp)
-# git clone [https://github.com/AlanVK13/Calculadora-Cientifica.git](https://github.com/AlanVK13/Calculadora-Cientifica.git)
-# cd Calculadora-Cientifica
-
-# 2. Compila el programa
-g++ calculadora.cpp -o calculadora.exe
-
-# 3. Ejecuta el programa
-./calculadora.exe
